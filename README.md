@@ -1,7 +1,11 @@
 Job Vacancy Application - Salta
 ===============================
 
+`staging:`\
 [![build status](https://gitlab.com/fiuba-memo2/jobvacancy/badges/staging/pipeline.svg)](https://gitlab.com/fiuba-memo2/tp1/salta/-/commits/staging)
+
+`master:`\
+[![build status](https://gitlab.com/fiuba-memo2/jobvacancy/badges/master/pipeline.svg)](https://gitlab.com/fiuba-memo2/tp1/salta/-/commits/master)
 
 ### Integrantes del grupo
 * [Dituro Celeste](https://gitlab.com/celedituro)
