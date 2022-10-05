@@ -1,7 +1,13 @@
 Job Vacancy Application - Salta
 ===============================
 
-[![build status](https://gitlab.com/fiuba-memo2/jobvacancy/badges/master/build.svg)](https://gitlab.com/fiuba-memo2/jobvacancy/commits/master)
+[![build status](https://gitlab.com/fiuba-memo2/jobvacancy/badges/staging/pipeline.svg)](https://gitlab.com/fiuba-memo2/tp1/salta/-/commits/staging)
+
+### Integrantes del grupo
+* [Dituro Celeste](https://gitlab.com/celedituro)
+* [Lopez Victoria Abril](https://gitlab.com/vickyylopezz)
+* [Pfaab Ivan Lautaro](https://gitlab.com/ipfaab)
+* [Villores Alejo](https://gitlab.com/alejovillores)
 
 ## PostgreSQL setup
 
