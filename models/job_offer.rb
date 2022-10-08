@@ -6,7 +6,7 @@ class JobOffer
                 :updated_on, :created_on, :salary
 
   validates :title, presence: true
-  validates :salary, numericality: { only_integer: true, allow_nil: true, greater_than_or_equal_to: 0 }
+  # validates :salary, numericality: { only_integer: true, allow_nil: true, greater_than_or_equal_to: 0 }
 
   def initialize(data = {})
     @id = data[:id]
@@ -17,7 +17,7 @@ class JobOffer
     @updated_on = data[:updated_on]
     @created_on = data[:created_on]
     @user_id = data[:user_id]
-    @salary = data[:salary].blank? ? nil : data[:salary]
+    @salary = data[:salary].blank? ? nil : Integer(data[:salary])
     validate!
   end
 

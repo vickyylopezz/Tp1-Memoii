@@ -69,3 +69,11 @@ end
 And(/^I delete it$/) do
   click_button('Delete')
 end
+
+When('I create a new offer with {string} and {int} salary') do |title, salary|
+  visit '/job_offers/new'
+  fill_in('job_offer_form[title]', with: title)
+  puts salary
+  fill_in('job_offer_form[salary]', with: salary)
+  click_button('Create')
+end
