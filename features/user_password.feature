@@ -11,7 +11,6 @@ Feature: User Password
     When I try to create the account
     Then My account is not created and I get an error message
   
-  @wip
   Scenario: Password without lowercase
     Given I complete the password fields with "TESTEANDO1"
     When I try to create the account

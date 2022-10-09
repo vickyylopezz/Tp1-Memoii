@@ -34,6 +34,7 @@ class User
 
   def validate_password(password)
     return if password.nil?
-    raise PasswordError unless UPPERCASE_PRESENCE_REGEX.match?(password) && LOWERCASE_PRESENCE_REGEX.match?(password)
+    raise PasswordError unless UPPERCASE_PRESENCE_REGEX.match?(password)
+    raise PasswordError unless LOWERCASE_PRESENCE_REGEX.match?(password)
   end
 end
