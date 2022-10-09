@@ -4,7 +4,7 @@ class User
   attr_accessor :id, :name, :email, :crypted_password, :job_offers, :updated_on, :created_on
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i.freeze
-
+  UPPERCASE_PRESENCE_REGEX = /(?=.*?[A-Z])/.freeze
   validates :name, :crypted_password, presence: true
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX,
                                               message: 'invalid email' }
@@ -13,6 +13,7 @@ class User
     @id = data[:id]
     @name = data[:name]
     @email = data[:email]
+    validate_password(data[:password])
     @crypted_password = if data[:password].nil?
                           data[:crypted_password]
                         else
@@ -25,5 +26,12 @@ class User
 
   def has_password?(password)
     Crypto.decrypt(crypted_password) == password
+  end
+
+  protected
+
+  def validate_password(password)
+    return if password.nil?
+    raise PasswordError unless UPPERCASE_PRESENCE_REGEX.match?(password)
   end
 end

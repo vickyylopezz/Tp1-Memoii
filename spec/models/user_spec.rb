@@ -47,12 +47,20 @@ describe User do
                           name: 'john doe')
     end
 
-    it 'should return false when password do not match' do
+    xit 'should return false when password do not match' do
       expect(user).not_to have_password('invalid')
     end
 
-    it 'should return true when password do  match' do
+    xit 'should return true when password do  match' do
       expect(user).to have_password(password)
+    end
+  end
+
+  describe 'validate_password' do
+    it 'it should raise an error when password did not contain at least one uppercase letter' do
+      expect do
+        described_class.new(name: 'John Doe', email: 'john@doe.com', password: 'testeando1')
+      end.to raise_error 'invalid password'
     end
   end
 end
