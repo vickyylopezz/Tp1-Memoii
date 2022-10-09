@@ -60,13 +60,19 @@ describe User do
     it 'it should raise an error when password did not contain at least one uppercase letter' do
       expect do
         described_class.new(name: 'John Doe', email: 'john@doe.com', password: 'testeando1')
-      end.to raise_error 'invalid password: password must contain at least 1 uppercase and 1 lowercase'
+      end.to raise_error 'invalid password: password must contain at least 1 uppercase, 1 lowercase and 1 number'
     end
 
     it 'it should raise an error when password did not contain at least one lowercase letter' do
       expect do
         described_class.new(name: 'John Doe', email: 'john@doe.com', password: 'TESTEANDO1')
-      end.to raise_error 'invalid password: password must contain at least 1 uppercase and 1 lowercase'
+      end.to raise_error 'invalid password: password must contain at least 1 uppercase, 1 lowercase and 1 number'
+    end
+
+    it 'it should raise an error when password did not contain at least one number' do
+      expect do
+        described_class.new(name: 'John Doe', email: 'john@doe.com', password: 'Testeando')
+      end.to raise_error 'invalid password: password must contain at least 1 uppercase, 1 lowercase and 1 number'
     end
   end
 end

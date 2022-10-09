@@ -15,8 +15,7 @@ Feature: User Password
     Given I complete the password fields with "TESTEANDO1"
     When I try to create the account
     Then My account is not created and I get an error message
-  
-  @wip
+
   Scenario: Password without number
     Given I complete the password fields with "Testeando"
     When I try to create the account
