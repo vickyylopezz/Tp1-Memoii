@@ -3,7 +3,7 @@ require 'integration_spec_helper'
 describe GateKeeper do
   let(:gate_keeper) { described_class.new }
 
-  let(:valid_password) { 'secure_pwd' }
+  let(:valid_password) { 'Secure_pwd1' }
   let(:invalid_password) { 'invalid_pwd' }
 
   let(:current_user) do
@@ -13,13 +13,13 @@ describe GateKeeper do
   end
 
   describe 'sign in succeed' do
-    xit 'should run succeed callback' do
+    it 'should run succeed callback' do
       gate_keeper.authenticate(current_user.email, valid_password).when_succeed do |user|
         expect(user.id).to eq(current_user.id)
       end
     end
 
-    xit 'should not run failed callback' do
+    it 'should not run failed callback' do
       gate_keeper.authenticate(current_user.email, valid_password).when_failed do
         raise 'should not call me'
       end
@@ -27,13 +27,13 @@ describe GateKeeper do
   end
 
   describe 'sign in failed' do
-    xit 'should run succeed callback' do
+    it 'should run succeed callback' do
       gate_keeper.authenticate(current_user.email, invalid_password).when_succeed do |_user|
         raise 'should not call me'
       end
     end
 
-    xit 'should not run failed callback' do
+    it 'should not run failed callback' do
       failed_callback_called = false
       gate_keeper.authenticate(current_user.email, invalid_password).when_failed do
         failed_callback_called = true

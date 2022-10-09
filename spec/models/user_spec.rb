@@ -40,18 +40,18 @@ describe User do
   end
 
   describe 'has password?' do
-    let(:password) { 'password' }
+    let(:password) { 'Password1' }
     let(:user) do
       described_class.new(password: password,
                           email: 'john.doe@someplace.com',
                           name: 'john doe')
     end
 
-    xit 'should return false when password do not match' do
+    it 'should return false when password do not match' do
       expect(user).not_to have_password('invalid')
     end
 
-    xit 'should return true when password do  match' do
+    it 'should return true when password do  match' do
       expect(user).to have_password(password)
     end
   end
@@ -83,6 +83,12 @@ describe User do
       expect do
         described_class.new(name: 'John Doe', email: 'john@doe.com', password: 'Test1')
       end.to raise_error error_message
+    end
+
+    it 'it should not raise an error when password is ok' do
+      expect do
+        described_class.new(name: 'John Doe', email: 'john@doe.com', password: 'Testeando1')
+      end.not_to raise_error error_message
     end
   end
 end

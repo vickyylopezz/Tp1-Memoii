@@ -16,3 +16,7 @@ end
 Then(/^My account is not created and I get an error message$/) do
   page.should have_content('invalid password')
 end
+
+Then('My account is created successfully') do
+  page.should have_content('User created')
+end
