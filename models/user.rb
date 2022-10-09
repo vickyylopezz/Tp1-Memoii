@@ -5,6 +5,8 @@ class User
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i.freeze
   UPPERCASE_PRESENCE_REGEX = /(?=.*?[A-Z])/.freeze
+  LOWERCASE_PRESENCE_REGEX = /(?=.*?[a-z])/.freeze
+
   validates :name, :crypted_password, presence: true
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX,
                                               message: 'invalid email' }
@@ -32,6 +34,6 @@ class User
 
   def validate_password(password)
     return if password.nil?
-    raise PasswordError unless UPPERCASE_PRESENCE_REGEX.match?(password)
+    raise PasswordError unless UPPERCASE_PRESENCE_REGEX.match?(password) && LOWERCASE_PRESENCE_REGEX.match?(password)
   end
 end

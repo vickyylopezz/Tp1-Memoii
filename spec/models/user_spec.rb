@@ -62,5 +62,11 @@ describe User do
         described_class.new(name: 'John Doe', email: 'john@doe.com', password: 'testeando1')
       end.to raise_error 'invalid password'
     end
+
+    it 'it should raise an error when password did not contain at least one lowercase letter' do
+      expect do
+        described_class.new(name: 'John Doe', email: 'john@doe.com', password: 'TESTEANDO1')
+      end.to raise_error 'invalid password'
+    end
   end
 end
