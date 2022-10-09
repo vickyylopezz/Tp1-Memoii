@@ -7,6 +7,7 @@ class User
   UPPERCASE_PRESENCE_REGEX = /(?=.*?[A-Z])/.freeze
   LOWERCASE_PRESENCE_REGEX = /(?=.*?[a-z])/.freeze
   NUMBER_PRESENCE_REGEX = /(?=.*?[0-9])/.freeze
+  MORE_THAN_8_CHARACTERS_REGEX = /.{8,}/.freeze
 
   validates :name, :crypted_password, presence: true
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX,
@@ -38,5 +39,6 @@ class User
     raise PasswordError unless UPPERCASE_PRESENCE_REGEX.match?(password)
     raise PasswordError unless LOWERCASE_PRESENCE_REGEX.match?(password)
     raise PasswordError unless NUMBER_PRESENCE_REGEX.match?(password)
+    raise PasswordError unless MORE_THAN_8_CHARACTERS_REGEX.match?(password)
   end
 end
