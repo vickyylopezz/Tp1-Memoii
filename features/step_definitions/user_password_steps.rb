@@ -14,5 +14,5 @@ When(/^I try to create the account$/) do
 end
 
 Then(/^My account is not created and I get an error message$/) do
-  page.should have_content('Invalid password')
+  page.should have_content('invalid password')
 end
