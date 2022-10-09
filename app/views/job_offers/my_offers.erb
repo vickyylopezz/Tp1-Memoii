@@ -6,6 +6,7 @@
 		<th>Description</th>
 		<th>Is active</th>
 		<th>Salary(USD)</th>
+		<th>Applicants amount</th>
 		<th>Actions</th>
 	</tr>
 	<% @offers.each do | offer| %>
@@ -29,6 +30,9 @@
 			<% else %>
 				N/A
 			<% end %>
+		</td>
+		<td>
+			<%= 1 %>
 		</td>		
 
 		<td>

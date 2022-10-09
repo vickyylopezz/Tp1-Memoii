@@ -10,7 +10,7 @@ Given(/^there is an offer with title "([^"]*)" and without any applicants$/) do 
   visit '/job_offers/new'
   fill_in('job_offer_form[title]', with: job_offer_title)
   click_button('Create')
-  @job_offer = JobOfferRepository.new.search_by_title(title)
+  click_button('Activate')
 end
 
 When(/^the user "([^"]*)" applicates to the job offer$/) do |user_email|
@@ -20,9 +20,9 @@ When(/^the user "([^"]*)" applicates to the job offer$/) do |user_email|
   click_button('Apply')
 end
 
-Then(/^the applicants amount of the offer should be (\d+)$/) do
+Then(/^the applicants amount of the offer "([^"]*)" should be (\d+)$/) do |job_title, applicant_amount|
   visit '/job_offers/my'
-  within('tr', text: title) do
-    page.should have_content(q_applicants)
+  within('tr', text: job_title) do
+    page.should have_content(applicant_amount)
   end
 end
