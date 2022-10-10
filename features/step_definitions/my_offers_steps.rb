@@ -26,3 +26,10 @@ Then(/^the applicants amount of the offer "([^"]*)" should be (\d+)$/) do |job_t
     page.should have_content(applicant_amount)
   end
 end
+
+When(/^the user "([^"]*)" applicates to the job offer again$/) do |user_email|
+  visit '/job_offers'
+  click_link 'Apply'
+  fill_in('job_application_form[applicant_email]', with: user_email)
+  click_button('Apply')
+end
