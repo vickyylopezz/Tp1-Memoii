@@ -29,6 +29,12 @@ describe JobApplication do
       ja = described_class.create_for('applicant@test.com', offer)
       expect(ja.job_offer).to eq(offer)
     end
+
+    it 'should set personal bio' do
+      personal_bio = 'This is a personal bio'
+      ja = described_class.create_for('applicant@test.com', job_offer, personal_bio)
+      expect(ja.personal_bio).to eq(personal_bio)
+    end
   end
 
   describe 'process' do
