@@ -16,6 +16,30 @@ When(/^I apply$/) do
   click_button('Apply')
 end
 
+When('I apply with {string} as personal description') do |string|
+  click_link 'Apply'
+  fill_in('job_application_form[applicant_email]', with: 'applicant@test.com')
+  fill_in('job_application_form[personal_bio]', with: string)
+  click_button('Apply')
+end
+
+When('I apply with a 600 characters personal description') do
+  click_link 'Apply'
+  fill_in('job_application_form[applicant_email]', with: 'applicant@test.com')
+  big_bio = ''
+  501.times { big_bio += 'a' }
+  fill_in('job_application_form[personal_bio]', with: big_bio)
+  click_button('Apply')
+end
+
+Then('I should get an error message') do
+  page.should have_content('too long')
+end
+
+Then('I should get an cannot be blank error message') do
+  page.should have_content("can't be blank")
+end
+
 Then(/^I should receive a mail with offerer info$/) do
   mail_store = "#{Padrino.root}/tmp/emails"
   file = File.open("#{mail_store}/applicant@test.com", 'r')

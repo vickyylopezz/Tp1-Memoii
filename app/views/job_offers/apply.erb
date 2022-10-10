@@ -6,6 +6,10 @@
 
   <%= f.label :applicant_email %>
  	<%= f.text_field :applicant_email %>
+  <%= errors_for(@errors, :applicant_email) %>
+  <%= f.label :personal_bio %>
+  <%= f.text_area :personal_bio %>
+  <%= errors_for(@errors, :personal_bio) %>
 
 	<hr/>
   <%= f.submit "Apply", :class => "btn btn-primary" %>
