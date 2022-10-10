@@ -18,4 +18,11 @@ describe JobApplicationRepository do
     repository.save(job_application)
     expect(repository.applicants_amount?(job_offer)).to eq 1
   end
+
+  it 'applicants amount should be 1 when the first user applies twice to the same offer' do
+    job_application = JobApplication.new('test@test.com', job_offer)
+    repository.save(job_application)
+    repository.save(job_application)
+    expect(repository.applicants_amount?(job_offer)).to eq 1
+  end
 end

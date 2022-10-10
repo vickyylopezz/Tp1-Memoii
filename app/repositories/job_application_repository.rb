@@ -6,6 +6,15 @@ class JobApplicationRepository < BaseRepository
     dataset.where(job_offer_id: job_offer.id).count
   end
 
+  def save(job_application)
+    if dataset.where(job_offer_id: job_application.job_offer&.id,
+                     applicant_email: job_application.applicant_email).count.positive?
+      nil
+    else
+      !insert(job_application).id.nil?
+    end
+  end
+
   def changeset(application)
     {
       applicant_email: application.applicant_email,
