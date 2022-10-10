@@ -5,12 +5,14 @@
 		<th>Location</th>
 		<th>Description</th>
 		<th>Is active</th>
+		<th>Salary(USD)</th>
+		<th>Applicants amount</th>
 		<th>Actions</th>
 	</tr>
 	<% @offers.each do | offer| %>
 
 	<tr>
-			<td>
+		<td>
 			<%= offer.title %>
 		</td>
 		<td>
@@ -21,6 +23,16 @@
 		</td>		
 		<td>
 			<%= offer.is_active %>
+		</td>
+		<td>
+			<% if offer.salary_valid? %>
+				<%= offer.salary %>
+			<% else %>
+				N/A
+			<% end %>
+		</td>
+		<td>
+			<%= applicants_amount(offer) %>
 		</td>		
 
 		<td>

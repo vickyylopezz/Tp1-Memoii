@@ -41,6 +41,7 @@ JobVacancy::App.controllers :job_offers do
     @job_offer = JobOfferRepository.new.find(params[:offer_id])
     applicant_email = params[:job_application_form][:applicant_email]
     @job_application = JobApplication.create_for(applicant_email, @job_offer)
+    JobApplicationRepository.new.save(@job_application)
     @job_application.process
     flash[:success] = 'Contact information sent.'
     redirect '/job_offers'
