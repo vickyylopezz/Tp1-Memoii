@@ -10,6 +10,12 @@ describe JobApplicationRepository do
   end
 
   it 'applicants amount should be 0 when nobody has applied' do
-    expect(repository.applicants_amount?).to eq 0
+    expect(repository.applicants_amount?(job_offer)).to eq 0
+  end
+
+  it 'applicants amount should be 1 when the first user applies' do
+    job_application = JobApplication.new('test@test.com', job_offer)
+    repository.save(job_application)
+    expect(repository.applicants_amount?(job_offer)).to eq 1
   end
 end
