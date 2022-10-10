@@ -99,10 +99,14 @@ JobVacancy::App.controllers :job_offers do
 
   delete :destroy do
     @job_offer = JobOfferRepository.new.find(params[:offer_id])
-    if JobOfferRepository.new.destroy(@job_offer)
-      flash[:success] = 'Offer deleted'
+    if !are_there_applicants?(@job_offer)
+      if JobOfferRepository.new.destroy(@job_offer)
+        flash[:success] = 'Offer deleted'
+      else
+        flash.now[:error] = 'Title is mandatory'
+      end
     else
-      flash.now[:error] = 'Title is mandatory'
+      flash[:error] = 'You cant delete an offer with applicants'
     end
     redirect 'job_offers/my'
   end

@@ -22,7 +22,6 @@ Feature: My Offers
     When I try to delete the offer "Java developer"
     Then the offer "Java developer" is successfully deleted
 
-  @wip
   Scenario: Job offerer tries to delete an offer with applicants
     Given there is an offer with title "Java developer" and with applicants
     When I try to delete the offer "Java developer"
