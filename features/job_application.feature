@@ -6,11 +6,13 @@ Feature: Job Application
   Background:
   	Given only a "Web Programmer" offer exists in the offers list
 
+  @wip
   Scenario: Apply to job offer
     Given I access the offers list page
     When I apply
     Then I should receive a mail with offerer info
 
+  @wip
   Scenario: Apply to job offer and adding personal description
     Given I access the offers list page
     When I apply with "Hi, I'm Bob, I'm 50 years old and I love programming" as personal description

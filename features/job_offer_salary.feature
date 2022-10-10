@@ -6,7 +6,6 @@ Feature: Job Offer Salary
   Background:
       Given I am logged in as job offerer
   
-  
   Scenario: Create new offer with $ 1000 anual salary.
     When I create a new offer with "Java" and 1000 salary
     Then I should see a offer created confirmation message

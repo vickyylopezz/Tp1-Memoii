@@ -13,7 +13,7 @@ Given(/^there is an offer with title "([^"]*)" and without any applicants$/) do 
   click_button('Activate')
 end
 
-When(/^the user "([^"]*)" applicates to the job offer$/) do |user_email|
+When(/^the user "([^"]*)" applies to the job offer$/) do |user_email|
   visit '/job_offers'
   click_link 'Apply'
   fill_in('job_application_form[applicant_email]', with: user_email)
@@ -27,7 +27,7 @@ Then(/^the applicants amount of the offer "([^"]*)" should be (\d+)$/) do |job_t
   end
 end
 
-When(/^the user "([^"]*)" applicates to the job offer again$/) do |user_email|
+When(/^the user "([^"]*)" applies to the job offer again$/) do |user_email|
   visit '/job_offers'
   click_link 'Apply'
   fill_in('job_application_form[applicant_email]', with: user_email)
