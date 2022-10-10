@@ -8,4 +8,8 @@ JobVacancy::App.helpers do
   def applicants_amount(offer)
     JobApplicationRepository.new.applicants_amount?(offer)
   end
+
+  def are_there_applicants?(offer)
+    applicants_amount(offer).positive?
+  end
 end
