@@ -5,7 +5,7 @@ JobVacancy::App.helpers do
     params[:job_offer_form].to_h.symbolize_keys
   end
 
-  def applicants_amount(_offer_id)
-    1
+  def applicants_amount(offer)
+    JobApplicationRepository.new.applicants_amount?(offer)
   end
 end

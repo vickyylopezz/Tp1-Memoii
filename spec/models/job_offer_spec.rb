@@ -23,11 +23,4 @@ describe JobOffer do
       expect(job_offer.salary_valid?).to eq false
     end
   end
-
-  describe 'applicants amount' do
-    xit 'applicants amount should be 0 when the offer is created' do
-      job_offer = described_class.new(title: 'a title')
-      expect(job_offer.applicants_amount).to eq 0
-    end
-  end
 end
