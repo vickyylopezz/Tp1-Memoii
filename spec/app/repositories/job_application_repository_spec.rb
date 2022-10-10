@@ -13,23 +13,23 @@ describe JobApplicationRepository do
     JobOfferRepository.new.save(job_offer)
     job_offer
   end
-  let(:job_application_one_offer_one) { JobApplication.new('test1@test.com', job_offer, 'test') }
-  let(:job_application_two_offer_one) { JobApplication.new('test2@test.com', job_offer, 'test') }
-  let(:job_application_three_offer_one) { JobApplication.new('test3@test.com', job_offer, 'test') }
-  let(:job_application_one_offer_two) { JobApplication.new('test1@test.com', job_offer_two, 'test') }
+  let(:job_application_one_offer_one) { JobApplication.new('test1@test.com', job_offer) }
+  let(:job_application_two_offer_one) { JobApplication.new('test2@test.com', job_offer) }
+  let(:job_application_three_offer_one) { JobApplication.new('test3@test.com', job_offer) }
+  let(:job_application_one_offer_two) { JobApplication.new('test1@test.com', job_offer_two) }
 
   it 'applicants amount should be 0 when nobody has applied' do
     expect(repository.applicants_amount?(job_offer)).to eq 0
   end
 
   it 'applicants amount should be 1 when the first user applies' do
-    job_application = JobApplication.new('test@test.com', job_offer, 'test')
+    job_application = JobApplication.new('test@test.com', job_offer)
     repository.save(job_application)
     expect(repository.applicants_amount?(job_offer)).to eq 1
   end
 
   it 'applicants amount should be 1 when the first user applies twice to the same offer' do
-    job_application = JobApplication.new('test@test.com', job_offer, 'test')
+    job_application = JobApplication.new('test@test.com', job_offer)
     repository.save(job_application)
     repository.save(job_application)
     expect(repository.applicants_amount?(job_offer)).to eq 1

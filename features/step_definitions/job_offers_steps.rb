@@ -54,22 +54,9 @@ end
 
 Given(/^I have "(.*?)" offer in my offers list$/) do |offer_title|
   JobOfferRepository.new.delete_all
+
   visit '/job_offers/new'
   fill_in('job_offer_form[title]', with: offer_title)
-  click_button('Create')
-end
-
-Given('I have {string} with no anual salary offer in my offers list') do |title|
-  JobOfferRepository.new.delete_all
-  visit '/job_offers/new'
-  fill_in('job_offer_form[title]', with: title)
-  click_button('Create')
-end
-
-Given('I have {string} with {int} anual salary offer in my offers list') do |title, salary|
-  visit '/job_offers/new'
-  fill_in('job_offer_form[title]', with: title)
-  fill_in('job_offer_form[salary]', with: salary)
   click_button('Create')
 end
 
@@ -95,10 +82,4 @@ When('I create a new offer with {string} and no salary') do |title|
   fill_in('job_offer_form[title]', with: title)
   fill_in('job_offer_form[salary]', with: '')
   click_button('Create')
-end
-
-When('I change the salary to {int}') do |new_salary|
-  click_link('Edit')
-  fill_in('job_offer_form[salary]', with: new_salary)
-  click_button('Save')
 end

@@ -1,20 +1,18 @@
 class JobApplication
   include ActiveModel::Validations
 
-  attr_accessor :applicant_email, :job_offer, :id, :created_on, :updated_on, :personal_bio
+  attr_accessor :applicant_email, :job_offer, :id, :created_on, :updated_on
 
-  validates :applicant_email, :job_offer, :personal_bio, presence: true
-  validates :personal_bio, length: { maximum: 500 }
+  validates :applicant_email, :job_offer, presence: true
 
-  def initialize(email, offer, personal_bio)
+  def initialize(email, offer)
     @applicant_email = email
     @job_offer = offer
-    @personal_bio = personal_bio
     validate!
   end
 
-  def self.create_for(email, offer, personal_bio)
-    JobApplication.new(email, offer, personal_bio)
+  def self.create_for(email, offer)
+    JobApplication.new(email, offer)
   end
 
   def process
