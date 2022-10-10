@@ -16,6 +16,10 @@ When(/^I apply$/) do
   click_button('Apply')
 end
 
+When('I write {string} as personal description') do |string|
+  fill_in('job_application_form[personal_bio]', with: string)
+end
+
 Then(/^I should receive a mail with offerer info$/) do
   mail_store = "#{Padrino.root}/tmp/emails"
   file = File.open("#{mail_store}/applicant@test.com", 'r')
