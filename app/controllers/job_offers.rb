@@ -40,7 +40,8 @@ JobVacancy::App.controllers :job_offers do
   post :apply, with: :offer_id do
     @job_offer = JobOfferRepository.new.find(params[:offer_id])
     applicant_email = params[:job_application_form][:applicant_email]
-    @job_application = JobApplication.create_for(applicant_email, @job_offer)
+    personal_bio = params[:job_application_form][:personal_bio]
+    @job_application = JobApplication.create_for(applicant_email, @job_offer, personal_bio)
     JobApplicationRepository.new.save(@job_application)
     @job_application.process
     flash[:success] = 'Contact information sent.'

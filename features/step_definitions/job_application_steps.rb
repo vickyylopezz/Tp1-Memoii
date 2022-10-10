@@ -16,8 +16,11 @@ When(/^I apply$/) do
   click_button('Apply')
 end
 
-When('I write {string} as personal description') do |string|
+When('I apply with {string} as personal description') do |string|
+  click_link 'Apply'
+  fill_in('job_application_form[applicant_email]', with: 'applicant@test.com')
   fill_in('job_application_form[personal_bio]', with: string)
+  click_button('Apply')
 end
 
 Then(/^I should receive a mail with offerer info$/) do
