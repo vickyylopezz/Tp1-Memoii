@@ -16,3 +16,15 @@ Feature: My Offers
     And the user "pepe_distinto@gmail.com" applicates to the job offer
     When the user "pepe_distinto@gmail.com" applicates to the job offer again
     Then the applicants amount of the offer "Java developer" should be 1
+
+@wip
+  Scenario: Job offerer tries to delete an offer without any applicants
+    Given there is an offer with title "Java developer" and without any applicants
+    When I try to delete the offer "Jave developer"
+    Then the offer "Java developer" is successfully deleted
+
+@wip
+  Scenario: Job offerer tries to delete an offer with applicants
+    Given there is an offer with title "Java developer" and with applicants
+    When I try to delete the offer "Jave developer"
+    Then the offer "Java developer" is not deleted and I get an error message
