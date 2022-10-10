@@ -23,7 +23,7 @@ describe JobApplication do
     end
 
     it 'should be invalid when personal bio has more than 500 characters' do
-      check_validation(:personal_bio, 'Personal bio is too long (maximum is 500 characters)') do
+      check_validation(:personal_bio, 'Personal bio too long') do
         big_bio = ''
         501.times { big_bio += 'a' }
         described_class.create_for('applicant@test.com', :job_offer, big_bio)
