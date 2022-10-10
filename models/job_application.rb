@@ -4,6 +4,7 @@ class JobApplication
   attr_accessor :applicant_email, :job_offer, :id, :created_on, :updated_on, :personal_bio
 
   validates :applicant_email, :job_offer, :personal_bio, presence: true
+  validates :personal_bio, length: { maximum: 500 }
 
   def initialize(email, offer, personal_bio)
     @applicant_email = email
