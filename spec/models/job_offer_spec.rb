@@ -12,5 +12,15 @@ describe JobOffer do
       job_offer = described_class.new(title: 'a title')
       expect(job_offer).to be_valid
     end
+
+    it 'salary should be valid when is 1000' do
+      job_offer = described_class.new(title: 'a title', salary: 1000)
+      expect(job_offer.salary_valid?).to eq true
+    end
+
+    it 'salary should be not valid when is blank' do
+      job_offer = described_class.new(title: 'a title', salary: '')
+      expect(job_offer.salary_valid?).to eq false
+    end
   end
 end

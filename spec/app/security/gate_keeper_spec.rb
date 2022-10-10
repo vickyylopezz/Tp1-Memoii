@@ -3,7 +3,7 @@ require 'integration_spec_helper'
 describe GateKeeper do
   let(:gate_keeper) { described_class.new }
 
-  let(:valid_password) { 'secure_pwd' }
+  let(:valid_password) { 'Secure_pwd1' }
   let(:invalid_password) { 'invalid_pwd' }
 
   let(:current_user) do

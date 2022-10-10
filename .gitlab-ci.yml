@@ -26,7 +26,7 @@ job_deploy_staging:
   stage: deploy_staging
   script:
   - gem install dpl
-  - dpl --provider=heroku --app=saltajobvacancystaging --api-key=$HEROKU_STAGING_API_KEY
+  - dpl --provider=heroku --app=saltajobvacancystaging --api-key=78276cb8-f534-4f03-b000-61059b862e61
   only:
   - staging
 
