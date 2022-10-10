@@ -17,6 +17,7 @@ When(/^the user "([^"]*)" applies to the job offer$/) do |user_email|
   visit '/job_offers'
   click_link 'Apply'
   fill_in('job_application_form[applicant_email]', with: user_email)
+  fill_in('job_application_form[personal_bio]', with: 'test')
   click_button('Apply')
 end
 
@@ -31,5 +32,6 @@ When(/^the user "([^"]*)" applies to the job offer again$/) do |user_email|
   visit '/job_offers'
   click_link 'Apply'
   fill_in('job_application_form[applicant_email]', with: user_email)
+  fill_in('job_application_form[personal_bio]', with: 'test')
   click_button('Apply')
 end
