@@ -17,17 +17,15 @@ describe JobApplication do
     end
 
     it 'should be invalid when personal bio is blank' do
-      check_validation(:personal_bio, "Personal bio can't be blank") do
-        described_class.create_for('applicant@test.com', :job_offer, nil)
-      end
+      mail = 'applicant@test.com'
+      expect { described_class.create_for(mail, :job_offer, nil) }.to raise_error(PersonalBioBlankError)
     end
 
     it 'should be invalid when personal bio has more than 500 characters' do
-      check_validation(:personal_bio, 'Personal bio too long') do
-        big_bio = ''
-        501.times { big_bio += 'a' }
-        described_class.create_for('applicant@test.com', :job_offer, big_bio)
-      end
+      big_bio = ''
+      501.times { big_bio += 'a' }
+      mail = 'applicant@test.com'
+      expect { described_class.create_for(mail, :job_offer, big_bio) }.to raise_error(PersonalBioToLongError)
     end
   end
 

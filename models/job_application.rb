@@ -3,14 +3,22 @@ class JobApplication
 
   attr_accessor :applicant_email, :job_offer, :id, :created_on, :updated_on, :personal_bio
 
-  validates :applicant_email, :job_offer, :personal_bio, presence: true
-  validates :personal_bio, length: { maximum: 500, message: 'too long' }
+  LIMIT = 500
+  MINIMUM = 0
+  validates :applicant_email, :job_offer, presence: true
 
   def initialize(email, offer, personal_bio)
     @applicant_email = email
     @job_offer = offer
     @personal_bio = personal_bio
+    validate_personal_bio
     validate!
+  end
+
+  def validate_personal_bio
+    raise PersonalBioBlankError if @personal_bio.nil?
+    raise PersonalBioBlankError if @personal_bio.length == MINIMUM
+    raise PersonalBioToLongError if @personal_bio.length > LIMIT
   end
 
   def self.create_for(email, offer, personal_bio)
