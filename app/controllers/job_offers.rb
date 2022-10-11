@@ -41,17 +41,18 @@ JobVacancy::App.controllers :job_offers do
     @job_offer = JobOfferRepository.new.find(params[:offer_id])
     applicant_email = params[:job_application_form][:applicant_email]
     personal_bio = params[:job_application_form][:personal_bio]
+    p personal_bio.length
     @job_application = JobApplication.create_for(applicant_email, @job_offer, personal_bio)
     JobApplicationRepository.new.save(@job_application)
     @job_application.process
 
     flash[:success] = 'Contact information sent.'
     redirect '/job_offers'
-  rescue ActiveModel::ValidationError => e
+  rescue StandardError => e
     @job_offer = JobOfferForm.from(JobOfferRepository.new.find(params[:offer_id]))
     @job_application = JobApplicationForm.new
-    @errors = e.model.errors
-
+    @errors = e
+    flash.now[:error] = e.message
     render 'job_offers/apply'
   end
 

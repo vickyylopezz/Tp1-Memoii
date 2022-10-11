@@ -33,11 +33,11 @@ When('I apply with a 600 characters personal description') do
 end
 
 Then('I should get an error message') do
-  page.should have_content('too long')
+  page.should have_content('Field description cannot be longer than 500 chars')
 end
 
 Then('I should get an cannot be blank error message') do
-  page.should have_content("can't be blank")
+  page.should have_content("Field description can't be blank")
 end
 
 Then(/^I should receive a mail with offerer info$/) do
