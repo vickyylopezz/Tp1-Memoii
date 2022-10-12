@@ -40,11 +40,20 @@ JobVacancy::App.controllers :job_offers do
   post :apply, with: :offer_id do
     @job_offer = JobOfferRepository.new.find(params[:offer_id])
     applicant_email = params[:job_application_form][:applicant_email]
-    @job_application = JobApplication.create_for(applicant_email, @job_offer)
+    personal_bio = params[:job_application_form][:personal_bio]
+    p personal_bio.length
+    @job_application = JobApplication.create_for(applicant_email, @job_offer, personal_bio)
     JobApplicationRepository.new.save(@job_application)
     @job_application.process
+
     flash[:success] = 'Contact information sent.'
     redirect '/job_offers'
+  rescue StandardError => e
+    @job_offer = JobOfferForm.from(JobOfferRepository.new.find(params[:offer_id]))
+    @job_application = JobApplicationForm.new
+    @errors = e
+    flash.now[:error] = e.message
+    render 'job_offers/apply'
   end
 
   post :create do
@@ -59,7 +68,7 @@ JobVacancy::App.controllers :job_offers do
     @job_offer = JobOfferForm.new
     @errors = e.model.errors
     flash.now[:error] = 'Please review the errors'
-    render 'job_offers/new'
+    render 'job_offers/list'
   end
 
   post :update, with: :offer_id do
@@ -91,10 +100,14 @@ JobVacancy::App.controllers :job_offers do
 
   delete :destroy do
     @job_offer = JobOfferRepository.new.find(params[:offer_id])
-    if JobOfferRepository.new.destroy(@job_offer)
-      flash[:success] = 'Offer deleted'
+    if !are_there_applicants?(@job_offer)
+      if JobOfferRepository.new.destroy(@job_offer)
+        flash[:success] = 'Offer deleted'
+      else
+        flash.now[:error] = 'Title is mandatory'
+      end
     else
-      flash.now[:error] = 'Title is mandatory'
+      flash[:error] = 'You cant delete an offer with applicants'
     end
     redirect 'job_offers/my'
   end
