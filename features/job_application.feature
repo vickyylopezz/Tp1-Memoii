@@ -27,10 +27,9 @@ Feature: Job Application
     And I apply
     Then I should get an cannot be blank error message
 
-  @wip
   Scenario: Fill in a job application form adding a cv link
     Given I access the offers list page
-    When I fill in the form applicantion
+    When I fill in the form application
     Then I have the chance to add a link to my cv
 
   @wip

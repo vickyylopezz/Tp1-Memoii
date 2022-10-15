@@ -50,3 +50,24 @@ Then(/^I should receive a mail with offerer info$/) do
   content.include?(@job_offer.owner.email).should be true
   content.include?(@job_offer.owner.name).should be true
 end
+
+When(/^I fill in the form application$/) do
+  click_link 'Apply'
+  fill_in('job_application_form[curriculum]', with: 'my_curriculum.com')
+end
+
+Then(/^I have the chance to add a link to my cv$/) do
+  page.should have_content('Curriculum link')
+end
+
+When(/^I apply with "linkedin-my_cv\.com" as my cv link$/) do |_arg|
+  pending
+end
+
+Then(/^the application is successfully submited$/) do
+  pending
+end
+
+When(/^I apply without a cv link$/) do
+  pending
+end
