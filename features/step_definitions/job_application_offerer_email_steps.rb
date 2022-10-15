@@ -1,7 +1,7 @@
 Given(/^only a "([^"]*)" offer exists owned by "([^"]*)" in the offers list$/) do |offer_title, offerer_email|
   @job_offer = JobOffer.new(title: offer_title, location: 'a nice job', description: 'a nice job')
-  @offerer = User.new({ email => offerer_email })
-  UserRepository.new.save(offerer)
+  @offerer = User.new(email: offerer_email, name: 'Offerer', password: 'Passw0rd!')
+  UserRepository.new.save(@offerer)
   @job_offer.owner = @offerer
   @job_offer.is_active = true
 

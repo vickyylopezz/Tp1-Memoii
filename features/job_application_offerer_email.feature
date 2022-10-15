@@ -12,6 +12,7 @@ Feature: Offerer email
     When the applicant applies
     Then I should receive an email with the applicant information
 
+  @wip
   Scenario: Apply to job offer twice
     Given an applicant who fills the application form and applies
     When the applicant applies to the same job offer again using the same email
