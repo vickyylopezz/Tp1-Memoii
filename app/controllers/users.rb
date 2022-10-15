@@ -23,7 +23,7 @@ JobVacancy::App.controllers :users do
         flash.now[:error] = 'Passwords do not match'
         render 'users/new'
       end
-    rescue PasswordError => e
+    rescue RuntimeError => e
       flash.now[:error] = e.message.to_s
       @user = User.new
       render 'users/new'

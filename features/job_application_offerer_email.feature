@@ -4,7 +4,7 @@ Feature: Offerer email
   I want to receive an email with the applicant information when applies
 
   Background:
-  	Given only a "Web Programmer" offer exists owned by "offerer@test.com" in the offers list
+  	Given only a "Web Programmer" offer exists owned by "offerer1@test.com" in the offers list
 
   Scenario: Apply to job offer
     Given an applicant who fills the application form
