@@ -41,7 +41,6 @@ JobVacancy::App.controllers :job_offers do
     @job_offer = JobOfferRepository.new.find(params[:offer_id])
     applicant_email = params[:job_application_form][:applicant_email]
     personal_bio = params[:job_application_form][:personal_bio]
-    p personal_bio.length
     @job_application = JobApplication.create_for(applicant_email, @job_offer, personal_bio)
     JobApplicationRepository.new.save(@job_application)
     @job_application.process
