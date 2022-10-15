@@ -69,5 +69,12 @@ describe JobApplicationRepository do
     ja_from_db = repository.find_by_email_and_offer('applicantcv@test.com', job_offer)
     expect(ja_from_db.curriculum).to eq ja.curriculum
   end
+
+  it 'applicant request without cv link' do
+    ja = JobApplication.new('applicantcv@test.com', job_offer, 'Test bio')
+    repository.save(ja)
+    ja_from_db = repository.find_by_email_and_offer('applicantcv@test.com', job_offer)
+    expect(ja_from_db.curriculum).to eq ja.curriculum
+  end
 end
 # rubocop:enable RSpec/MultipleMemoizedHelpers

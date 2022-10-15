@@ -37,7 +37,6 @@ Feature: Job Application
     When I apply with "linkedin-my_cv.com" as my cv link
     Then the application is successfully submited
 
-  @wip
   Scenario: Apply to job offer without adding a cv link
     Given I access the offers list page
     When I apply without a cv link

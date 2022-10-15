@@ -73,5 +73,8 @@ Then(/^the application is successfully submited$/) do
 end
 
 When(/^I apply without a cv link$/) do
-  pending
+  click_link 'Apply'
+  fill_in('job_application_form[applicant_email]', with: 'applicant@test.com')
+  fill_in('job_application_form[personal_bio]', with: 'Test bio')
+  click_button('Apply')
 end
