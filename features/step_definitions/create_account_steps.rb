@@ -15,10 +15,15 @@ Then(/^the account is successfully created$/) do
   page.should have_content('User created')
 end
 
-Given(/^there is an user already registered with the email "([^"]*)"$/) do |_user_email|
-  pending
+Given(/^there is an user already registered with the email "([^"]*)"$/) do |user_email|
+  visit '/register'
+  fill_in('user[name]', with: 'test')
+  fill_in('user[email]', with: user_email)
+  fill_in('user[password]', with: 'Passw0rd')
+  fill_in('user[password_confirmation]', with: 'Passw0rd')
+  click_button('Create')
 end
 
 Then(/^the account is not created and I get an error message$/) do
-  pending
+  page.should have_content('This user email has an account associated')
 end
