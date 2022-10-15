@@ -41,12 +41,12 @@ JobVacancy::App.controllers :job_offers do
     @job_offer = JobOfferRepository.new.find(params[:offer_id])
     applicant_email = params[:job_application_form][:applicant_email]
     personal_bio = params[:job_application_form][:personal_bio]
-    p personal_bio.length
     @job_application = JobApplication.create_for(applicant_email, @job_offer, personal_bio)
-    JobApplicationRepository.new.save(@job_application)
-    @job_application.process
-
-    flash[:success] = 'Contact information sent.'
+    unless JobApplicationRepository.new.save(@job_application).nil?
+      @job_application.process
+      @job_application.process_to_offerer
+      flash[:success] = 'Contact information sent.'
+    end
     redirect '/job_offers'
   rescue StandardError => e
     @job_offer = JobOfferForm.from(JobOfferRepository.new.find(params[:offer_id]))
@@ -68,7 +68,7 @@ JobVacancy::App.controllers :job_offers do
     @job_offer = JobOfferForm.new
     @errors = e.model.errors
     flash.now[:error] = 'Please review the errors'
-    render 'job_offers/list'
+    render 'job_offers/new'
   end
 
   post :update, with: :offer_id do

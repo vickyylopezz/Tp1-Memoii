@@ -55,5 +55,11 @@ describe JobApplication do
       expect(JobVacancy::App).to receive(:deliver).with(:notification, :contact_info_email, ja)
       ja.process
     end
+
+    it 'should deliver applicant information to offerer' do
+      ja = described_class.create_for('applicant@test.com', job_offer, 'test')
+      expect(JobVacancy::App).to receive(:deliver).with(:offerer_notification, :contact_info_email, ja)
+      ja.process_to_offerer
+    end
   end
 end
