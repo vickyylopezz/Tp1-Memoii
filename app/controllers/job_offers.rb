@@ -67,7 +67,7 @@ JobVacancy::App.controllers :job_offers do
     @job_offer = JobOfferForm.new
     @errors = e.model.errors
     flash.now[:error] = 'Please review the errors'
-    render 'job_offers/list'
+    render 'job_offers/new'
   end
 
   post :update, with: :offer_id do
