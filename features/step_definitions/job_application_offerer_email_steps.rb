@@ -29,13 +29,20 @@ Then(/^I should receive an email with the applicant information$/) do
 end
 
 Given(/^an applicant who fills the application form and applies$/) do
-  pending
+  step 'an applicant who fills the application form'
+  step 'the applicant applies'
+  mail_store = "#{Padrino.root}/tmp/emails"
+  file = File.open("#{mail_store}/#{@offerer.email}", 'r')
+  @file_length = file.size
 end
 
 When(/^the applicant applies to the same job offer again using the same email$/) do
-  pending
+  step 'an applicant who fills the application form'
+  step 'the applicant applies'
 end
 
 Then(/^I should not receive a second email$/) do
-  pending
+  mail_store = "#{Padrino.root}/tmp/emails"
+  file = File.open("#{mail_store}/#{@offerer.email}", 'r')
+  file.size.should == @file_length
 end

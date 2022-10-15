@@ -42,11 +42,11 @@ JobVacancy::App.controllers :job_offers do
     applicant_email = params[:job_application_form][:applicant_email]
     personal_bio = params[:job_application_form][:personal_bio]
     @job_application = JobApplication.create_for(applicant_email, @job_offer, personal_bio)
-    JobApplicationRepository.new.save(@job_application)
-    @job_application.process
-    @job_application.process_to_offerer
-
-    flash[:success] = 'Contact information sent.'
+    unless JobApplicationRepository.new.save(@job_application).nil?
+      @job_application.process
+      @job_application.process_to_offerer
+      flash[:success] = 'Contact information sent.'
+    end
     redirect '/job_offers'
   rescue StandardError => e
     @job_offer = JobOfferForm.from(JobOfferRepository.new.find(params[:offer_id]))
