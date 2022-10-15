@@ -32,7 +32,6 @@ Feature: Job Application
     When I fill in the form application
     Then I have the chance to add a link to my cv
 
-  @wip
   Scenario: Apply to job offer adding a cv link
     Given I access the offers list page
     When I apply with "linkedin-my_cv.com" as my cv link
