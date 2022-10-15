@@ -1,4 +1,3 @@
-@wip
 Feature: Offerer email
   In order to be aware of my offers
   As a offerer

@@ -28,4 +28,8 @@ class JobApplication
   def process
     JobVacancy::App.deliver(:notification, :contact_info_email, self)
   end
+
+  def process_to_offerer
+    JobVacancy::App.deliver(:offerer_notification, :contact_info_email, self)
+  end
 end

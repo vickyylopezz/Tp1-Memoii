@@ -40,13 +40,13 @@
 # and then all delivered mail will use these settings unless otherwise specified.
 #
 
-JobVacancy::App.mailer :notification do
+JobVacancy::App.mailer :offerer_notification do
   email :contact_info_email do |job_application|
     from 'Job Vacancy <no_reply@jobvacancy.com>'
-    to job_application.applicant_email
-    subject 'Job Application: Contact information'
-    locals job_offer: job_application.job_offer
+    to job_application.job_offer.user.email
+    subject 'Job Application - Contact information'
+    locals job_application: job_application
     content_type :plain
-    render 'notification/contant_info_email'
+    render 'notification/offerer_info_email'
   end
 end
