@@ -33,4 +33,18 @@ describe JobOffer do
       expect(job_offer).to be_valid
     end
   end
+
+  describe 'expired_offer?' do
+    it 'should be expired when expired date is 10/10/22 and today is 16/10/22' do
+      date = Date.new(2022, 10, 10)
+      job_offer = described_class.new(title: 'a title', salary: 1000, expired_date: date)
+      expect(job_offer.expired_offer?).to eq true
+    end
+
+    it 'should not be expired when expired date is 17/10/22 and today is 16/10/22' do
+      date = Date.new(2022, 10, 17)
+      job_offer = described_class.new(title: 'a title', salary: 1000, expired_date: date)
+      expect(job_offer.expired_offer?).to eq false
+    end
+  end
 end

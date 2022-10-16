@@ -52,4 +52,8 @@ class JobOffer
 
     salary.positive?
   end
+
+  def expired_offer?
+    (expired_date - Date.today).negative?
+  end
 end
