@@ -1,4 +1,4 @@
-
+@wip
 Feature: Reset a search of offers
   In order to get back all job offers
   As an applicant

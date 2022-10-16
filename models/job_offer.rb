@@ -1,13 +1,17 @@
+require 'date'
+
 class JobOffer
   include ActiveModel::Validations
 
   attr_accessor :id, :user, :user_id, :title,
                 :location, :description, :is_active,
-                :updated_on, :created_on, :salary
+                :updated_on, :created_on, :salary,
+                :expired_date
 
   validates :title, presence: true
-  # validates :salary, numericality: { only_integer: true, allow_nil: true, greater_than_or_equal_to: 0 }
+  validates :expired_date, presence: true
 
+  # rubocop:disable Metrics/AbcSize
   def initialize(data = {})
     @id = data[:id]
     @title = data[:title]
@@ -18,8 +22,10 @@ class JobOffer
     @created_on = data[:created_on]
     @user_id = data[:user_id]
     @salary = data[:salary].blank? ? nil : Integer(data[:salary])
+    @expired_date = data[:expired_date]
     validate!
   end
+  # rubocop:enable Metrics/AbcSize
 
   def owner
     user

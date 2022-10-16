@@ -9,13 +9,13 @@ describe JobApplicationRepository do
     user
   end
   let(:job_offer) do
-    job_offer = JobOffer.new(title: 'a title', is_active: true)
+    job_offer = JobOffer.new(title: 'a title', is_active: true, expired_date: Date.today)
     job_offer.owner = user
     JobOfferRepository.new.save(job_offer)
     job_offer
   end
   let(:job_offer_two) do
-    job_offer = JobOffer.new(title: 'a title2', is_active: true)
+    job_offer = JobOffer.new(title: 'a title2', is_active: true, expired_date: Date.today)
     job_offer.owner = user
     JobOfferRepository.new.save(job_offer)
     job_offer
