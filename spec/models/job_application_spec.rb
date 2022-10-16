@@ -47,6 +47,12 @@ describe JobApplication do
       ja = described_class.create_for('applicant@test.com', job_offer, personal_bio)
       expect(ja.personal_bio).to eq(personal_bio)
     end
+
+    it 'should set curriculum' do
+      curriculum = 'curriculum.com'
+      ja = described_class.create_for('applicant@test.com', job_offer, 'Test bio', curriculum)
+      expect(ja.curriculum).to eq(curriculum)
+    end
   end
 
   describe 'process' do

@@ -50,3 +50,31 @@ Then(/^I should receive a mail with offerer info$/) do
   content.include?(@job_offer.owner.email).should be true
   content.include?(@job_offer.owner.name).should be true
 end
+
+When(/^I fill in the form application$/) do
+  click_link 'Apply'
+  fill_in('job_application_form[curriculum]', with: 'my_curriculum.com')
+end
+
+Then(/^I have the chance to add a link to my cv$/) do
+  page.should have_content('Curriculum link')
+end
+
+When(/^I apply with "([^"]*)" as my cv link$/) do |cv_link|
+  click_link 'Apply'
+  fill_in('job_application_form[applicant_email]', with: 'applicant@test.com')
+  fill_in('job_application_form[personal_bio]', with: 'Test bio')
+  fill_in('job_application_form[curriculum]', with: cv_link)
+  click_button('Apply')
+end
+
+Then(/^the application is successfully submited$/) do
+  page.should have_content('Contact information sent.')
+end
+
+When(/^I apply without a cv link$/) do
+  click_link 'Apply'
+  fill_in('job_application_form[applicant_email]', with: 'applicant@test.com')
+  fill_in('job_application_form[personal_bio]', with: 'Test bio')
+  click_button('Apply')
+end

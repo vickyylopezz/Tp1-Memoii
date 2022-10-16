@@ -26,3 +26,18 @@ Feature: Job Application
     Given I access the offers list page
     And I apply
     Then I should get an cannot be blank error message
+
+  Scenario: Fill in a job application form adding a cv link
+    Given I access the offers list page
+    When I fill in the form application
+    Then I have the chance to add a link to my cv
+
+  Scenario: Apply to job offer adding a cv link
+    Given I access the offers list page
+    When I apply with "linkedin-my_cv.com" as my cv link
+    Then the application is successfully submited
+
+  Scenario: Apply to job offer without adding a cv link
+    Given I access the offers list page
+    When I apply without a cv link
+    Then the application is successfully submited
