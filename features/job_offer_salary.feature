@@ -1,4 +1,4 @@
-@wip
+
 Feature: Job Offer Salary
   In order to get employees
   As a job offerer

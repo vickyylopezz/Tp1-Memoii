@@ -1,4 +1,4 @@
-@wip
+
 Feature: My Offers
   In order to be aware of the amount of applicants to one offer
   As a job offerer

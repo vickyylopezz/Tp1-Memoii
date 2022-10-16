@@ -1,4 +1,4 @@
-@wip
+
 Feature: Job Offers expired date
   In order 
   As a job offerer
