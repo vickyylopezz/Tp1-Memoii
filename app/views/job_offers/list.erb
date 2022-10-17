@@ -2,7 +2,7 @@
 <div class="search-box">
 	<form method="POST" action="search" class="form-search">
 		<%= csrf_token_field %>
-		<input type="text" name="q" />
+		<input type="text" name="q" value="<%= @search %>" />
 		<input type="submit" value="search" id="search-button" class="btn btn-primary"/>
 		<%= link_to 'clean', url_for(:job_offers, :latest), :class => "btn btn-secondary" %>
 	</form>
