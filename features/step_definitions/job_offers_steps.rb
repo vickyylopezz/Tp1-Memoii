@@ -23,6 +23,13 @@ When(/^I create a new offer with "(.*?)" as the title$/) do |title|
   click_button('Create')
 end
 
+When('I create a new offer with {string} as the title and {int}\/{int}\/{int} as the expired date') do |title, day, month, year|
+  visit '/job_offers/new'
+  fill_in('job_offer_form[title]', with: title)
+  fill_in('job_offer_form[expired_date]', with: Date.new(year, month, day))
+  click_button('Create')
+end
+
 Then(/^I should see a offer created confirmation message$/) do
   page.should have_content(OFFER_CREATED_MESSAGE)
 end
