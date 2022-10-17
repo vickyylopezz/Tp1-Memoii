@@ -13,7 +13,7 @@ Job Vacancy Application - Salta
 * [Pfaab Ivan Lautaro](https://gitlab.com/ipfaab)
 * [Villores Alejo](https://gitlab.com/alejovillores)
 
-## PostgreSQL setup
+### PostgreSQL setup
 
 Follow these steps to initialize the PostgreSQL databases:
 
