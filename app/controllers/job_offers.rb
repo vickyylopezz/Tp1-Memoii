@@ -11,6 +11,7 @@ JobVacancy::App.controllers :job_offers do
 
   get :new do
     @job_offer = JobOfferForm.new
+    @edit = false
     render 'job_offers/new'
   end
 
@@ -21,6 +22,7 @@ JobVacancy::App.controllers :job_offers do
 
   get :edit, with: :offer_id do
     @job_offer = JobOfferForm.from(JobOfferRepository.new.find(params[:offer_id]))
+    @edit = true
     # TODO: validate the current user is the owner of the offer
     render 'job_offers/edit'
   end
