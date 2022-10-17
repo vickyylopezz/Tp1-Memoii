@@ -14,3 +14,8 @@ Then('^I should see "(.*?)" in my offers list$') do |title|
   visit '/job_offers/my'
   page.should have_content(title)
 end
+
+Then('I should not see {string} in the offers list') do |title|
+  visit '/job_offers/latest'
+  page.should_not have_content(title)
+end

@@ -11,7 +11,6 @@ Feature: Job Offers expired date
     When I visit my offers list on 19/10/22
     Then I should see "Programmer job" in my offers list
 
-  @wip
   Scenario: Expired job offer
     When I visit my offers list on 21/10/22
-    Then I should not see "Programmer job" in my offers list
+    Then I should not see "Programmer job" in the offers list
