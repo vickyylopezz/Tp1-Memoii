@@ -1,5 +1,6 @@
 Given(/^only a "(.*?)" offer exists in the offers list$/) do |job_title|
-  @job_offer = JobOffer.new(title: job_title, location: 'a nice job', description: 'a nice job')
+  @job_offer = JobOffer.new(title: job_title, location: 'a nice job', description: 'a nice job',
+                            expired_date: Date.today)
   @job_offer.owner = UserRepository.new.first
   @job_offer.is_active = true
 

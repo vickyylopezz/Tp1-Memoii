@@ -22,3 +22,10 @@ Feature: Job Offers CRUD
     When I delete it
     Then I should see a offer deleted confirmation message
     And I should not see "Programmer vacancy!!!" in my offers list
+
+  Scenario: Create new offer with expired date
+    When I create a new job offer with "Programmer vacancy" as the title 
+    And 20/10/22 as the expired date
+    Then I should see a offer created confirmation message
+    And I should see "Programmer vacancy" in my offers list
+  

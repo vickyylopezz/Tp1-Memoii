@@ -14,7 +14,8 @@ describe JobOfferRepository do
       today_offer = JobOffer.new(title: 'a title',
                                  updated_on: Date.today,
                                  is_active: true,
-                                 user_id: owner.id)
+                                 user_id: owner.id,
+                                 expired_date: Date.today)
       repository.save(today_offer)
       today_offer
     end
@@ -23,7 +24,8 @@ describe JobOfferRepository do
       thirty_day_offer = JobOffer.new(title: 'a title',
                                       updated_on: Date.today - 45,
                                       is_active: true,
-                                      user_id: owner.id)
+                                      user_id: owner.id,
+                                      expired_date: Date.today)
       repository.save(thirty_day_offer)
       thirty_day_offer
     end

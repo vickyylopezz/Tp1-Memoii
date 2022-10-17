@@ -7,6 +7,7 @@
 		<th>Is active</th>
 		<th>Salary(USD)</th>
 		<th>Applicants amount</th>
+		<th>Expired Date</th>
 		<th>Actions</th>
 	</tr>
 	<% @offers.each do | offer| %>
@@ -33,6 +34,9 @@
 		</td>
 		<td>
 			<%= applicants_amount(offer) %>
+		</td>
+		<td>
+			<%= offer.expired_date %>
 		</td>		
 
 		<td>

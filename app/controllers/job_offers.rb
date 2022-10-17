@@ -11,6 +11,7 @@ JobVacancy::App.controllers :job_offers do
 
   get :new do
     @job_offer = JobOfferForm.new
+    @edit = false
     render 'job_offers/new'
   end
 
@@ -21,6 +22,8 @@ JobVacancy::App.controllers :job_offers do
 
   get :edit, with: :offer_id do
     @job_offer = JobOfferForm.from(JobOfferRepository.new.find(params[:offer_id]))
+    @edit = true
+    @value = @job_offer.expired_date
     # TODO: validate the current user is the owner of the offer
     render 'job_offers/edit'
   end
@@ -33,7 +36,8 @@ JobVacancy::App.controllers :job_offers do
   end
 
   post :search do
-    @offers = JobOfferRepository.new.search_by_title(params[:q])
+    @search = params[:q]
+    @offers = JobOfferRepository.new.search_by_title(@search)
     render 'job_offers/list'
   end
 
@@ -60,6 +64,7 @@ JobVacancy::App.controllers :job_offers do
   post :create do
     job_offer = JobOffer.new(job_offer_params)
     job_offer.owner = current_user
+    job_offer.date_provider = DateProvider.new
     if JobOfferRepository.new.save(job_offer)
       TwitterClient.publish(job_offer) if params['create_and_twit']
       flash[:success] = 'Offer created'

@@ -1,4 +1,4 @@
-
+@wip
 Feature: Reset a search of offers
   In order to get back all job offers
   As an applicant
@@ -8,7 +8,6 @@ Feature: Reset a search of offers
   	Given "Web Programmer" job offer exist in the offers list
     And "Mobile programmer" job offer exist in the offers list
 
-  
   Scenario: Reset a search of offers
     Given I search for "Web Programmer" offers
     And only "Web Programmer" offer exists in the offers list

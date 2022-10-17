@@ -1,5 +1,5 @@
 Given('{string} job offer exist in the offers list') do |title1|
-  @job_offer = JobOffer.new(title: title1, location: 'a nice job', description: 'a nice job')
+  @job_offer = JobOffer.new(title: title1, location: 'a nice job', description: 'a nice job', expired_date: Date.today)
   @job_offer.owner = UserRepository.new.first
   @job_offer.is_active = true
   JobOfferRepository.new.save @job_offer

@@ -9,6 +9,7 @@ end
 Given(/^there is an offer with title "([^"]*)" and without any applicants$/) do |job_offer_title|
   visit '/job_offers/new'
   fill_in('job_offer_form[title]', with: job_offer_title)
+  fill_in('job_offer_form[expired_date]', with: Date.today)
   click_button('Create')
   click_button('Activate')
 end
@@ -48,6 +49,7 @@ end
 Given(/^there is an offer with title "([^"]*)" and with applicants$/) do |job_title|
   visit '/job_offers/new'
   fill_in('job_offer_form[title]', with: job_title)
+  fill_in('job_offer_form[expired_date]', with: Date.today)
   click_button('Create')
   click_button('Activate')
   visit '/job_offers'

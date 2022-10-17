@@ -2,7 +2,7 @@
 <div class="search-box">
 	<form method="POST" action="search" class="form-search">
 		<%= csrf_token_field %>
-		<input type="text" name="q" />
+		<input type="text" name="q" value="<%= @search %>" />
 		<input type="submit" value="search" id="search-button" class="btn btn-primary"/>
 		<%= link_to 'clean', url_for(:job_offers, :latest), :class => "btn btn-secondary" %>
 	</form>
@@ -17,30 +17,29 @@
 		<th>Actions</th>
 	</tr>
 	<% @offers.each do | offer| %>
-
-	<tr>
-		<td>
-			<%= offer.title %>
-		</td>
-		<td>
-			<%= offer.location %>
-		</td>
-		<td>
-			<%= offer.description %>
-		</td>
-		<td>
-			<% if offer.salary_valid? %>
-				<%= offer.salary %>
-			<% else %>
-				N/A
-			<% end %>
-		</td>
-		
-		<td>
-			<%= link_to 'Apply', url_for(:job_offers, :apply, :offer_id => offer.id), :class => "btn btn-primary" %>
-		</td>		
-	</tr>
-
-  <% end %>
-
+		<% if offer.expired_offer? == false %>
+			<tr>
+				<td>
+					<%= offer.title %>
+				</td>
+				<td>
+					<%= offer.location %>
+				</td>
+				<td>
+					<%= offer.description %>
+				</td>
+				<td>
+					<% if offer.salary_valid? %>
+						<%= offer.salary %>
+					<% else %>
+						N/A
+					<% end %>
+				</td>
+				
+				<td>
+					<%= link_to 'Apply', url_for(:job_offers, :apply, :offer_id => offer.id), :class => "btn btn-primary" %>
+				</td>		
+			</tr>
+		<% end %>
+  	<% end %>
 </table>
