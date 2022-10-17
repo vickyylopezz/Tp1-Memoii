@@ -6,7 +6,7 @@ class JobOffer
   attr_accessor :id, :user, :user_id, :title,
                 :location, :description, :is_active,
                 :updated_on, :created_on, :salary,
-                :expired_date
+                :expired_date, :provider_date
 
   validates :title, presence: true
   validates :expired_date, presence: true
@@ -35,6 +35,10 @@ class JobOffer
     self.user = a_user
   end
 
+  def date_provider=(provider)
+    self.provider_date = provider
+  end
+
   def activate
     self.is_active = true
   end
@@ -54,6 +58,6 @@ class JobOffer
   end
 
   def expired_offer?
-    (expired_date - Date.today).negative?
+    @provider_date.expired_offer(@expired_date)
   end
 end

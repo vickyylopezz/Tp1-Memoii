@@ -64,6 +64,7 @@ JobVacancy::App.controllers :job_offers do
   post :create do
     job_offer = JobOffer.new(job_offer_params)
     job_offer.owner = current_user
+    job_offer.date_provider = DateProvider.new
     if JobOfferRepository.new.save(job_offer)
       TwitterClient.publish(job_offer) if params['create_and_twit']
       flash[:success] = 'Offer created'

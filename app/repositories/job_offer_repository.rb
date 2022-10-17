@@ -30,6 +30,7 @@ class JobOfferRepository < BaseRepository
     # TODO: Eager load user to avoid N+1 queries
     user = UserRepository.new.find(job_offer.user_id)
     job_offer.owner = user
+    job_offer.date_provider = DateProvider.new
     job_offer
   end
 

@@ -23,9 +23,12 @@ When(/^I create a new offer with "(.*?)" as the title$/) do |title|
   click_button('Create')
 end
 
-When('I create a new offer with {string} as the title and {int}\/{int}\/{int} as the expired date') do |title, day, month, year|
+When(/^I create a new job offer with "(.*?)" as the title$/) do |title|
   visit '/job_offers/new'
   fill_in('job_offer_form[title]', with: title)
+end
+
+When('{int}\/{int}\/{int} as the expired date') do |day, month, year|
   fill_in('job_offer_form[expired_date]', with: Date.new(year, month, day))
   click_button('Create')
 end

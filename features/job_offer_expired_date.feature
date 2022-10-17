@@ -4,10 +4,9 @@ Feature: Job Offers expired date
   I want to set an expired date to my offers
 
   Background:
-  	Given I create a new offer with "Programmer job" as the title 
-    And 20/10/22 as the expired date
+  	Given I am logged in as job offerer
+    And I create a new job offer with "Programmer job" as the title and 20/10/22 as the expired date
 
-  @wip
   Scenario: Not expired job offer
     When I visit my offers list on 19/10/22
     Then I should see "Programmer job" in my offers list
