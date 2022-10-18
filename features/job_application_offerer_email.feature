@@ -14,4 +14,4 @@ Feature: Offerer email
   Scenario: Apply to job offer twice
     Given an applicant who fills the application form and applies
     When the applicant applies to the same job offer again using the same email
-    Then I should not receive a second email 
+    Then I should not receive a second email and I get an error message

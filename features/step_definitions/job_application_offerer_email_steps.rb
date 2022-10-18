@@ -42,7 +42,8 @@ When(/^the applicant applies to the same job offer again using the same email$/)
   step 'the applicant applies'
 end
 
-Then(/^I should not receive a second email$/) do
+Then(/^I should not receive a second email and I get an error message$/) do
+  page.should have_content('You have already applied to this job offer')
   mail_store = "#{Padrino.root}/tmp/emails"
   file = File.open("#{mail_store}/#{@offerer.email}", 'r')
   file.size.should == @file_length

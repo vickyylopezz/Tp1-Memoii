@@ -47,7 +47,9 @@ JobVacancy::App.controllers :job_offers do
     personal_bio = params[:job_application_form][:personal_bio]
     curriculum = params[:job_application_form][:curriculum]
     @job_application = JobApplication.create_for(applicant_email, @job_offer, personal_bio, curriculum)
-    unless JobApplicationRepository.new.save(@job_application).nil?
+    if JobApplicationRepository.new.save(@job_application).nil?
+      flash[:error] = 'You have already applied to this job offer'
+    else
       @job_application.process
       @job_application.process_to_offerer
       flash[:success] = 'Contact information sent.'
