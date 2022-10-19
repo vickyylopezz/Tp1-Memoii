@@ -1,2 +1,5 @@
 You have received an application from "<%= job_application.applicant_email %>" to the offer "<%= job_application.job_offer.title %>".
 Applicant description is "<%= job_application.personal_bio %>"
+<% unless job_application.curriculum.empty? %>
+Curriculum: "<%=job_application.curriculum %>"
+<% end %>
