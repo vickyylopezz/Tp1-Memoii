@@ -10,6 +10,12 @@ When('I visit my offers list on {int}\/{int}\/{int}') do |day, month, year|
   @date = Date.new(year, month, day)
 end
 
+When('republish {string} expired offer with date {int}\/{int}\/{int}') do |_string, day, month, year|
+  click_link('Republish')
+  fill_in('job_offer_form[expired_date]', with: Date.new(year, month, day))
+  click_button('Save')
+end
+
 Then('^I should see "(.*?)" in my offers list$') do |title|
   visit '/job_offers/my'
   page.should have_content(title)
@@ -20,15 +26,8 @@ Then('I should not see {string} in the offers list') do |title|
   page.should_not have_content(title)
 end
 
-When('republish {string} expired offer with date {int}\/{int}\/{int}') do |_string, day, month, year|
-  click_link('Republish')
-  fill_in('job_offer_form[expired_date]', with: Date.new(year, month, day))
-  click_button('Save')
-end
-
-Then('I should see {string} and {int}\/{int}\/{int} in my offers list') do |title, day, month, year|
-  visit '/job_offers/latest'
-  page.should have_content(title)
+Then('I should see {int}\/{int}\/{int} in my offers list') do |day, month, year|
+  visit '/job_offers/my'
   page.should have_content(day)
   page.should have_content(month)
   page.should have_content(year)
