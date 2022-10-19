@@ -18,6 +18,6 @@ Feature: Job Offers expired date
   @wip
   Scenario: Republish expired job offer
   When I visit my offers list on 21/10/22
-  And republish "Programmer job" expired ofer with date 23/10/22
+  And republish "Programmer job" expired offer with date 23/10/22
   Then I should see "Programmer job" and 23/10/22 in my offers list
   
