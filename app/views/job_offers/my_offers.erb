@@ -41,6 +41,9 @@
 
 		<td>
 			<%= link_to 'Edit', url_for(:job_offers, :edit, :offer_id => offer.id), :class => "btn btn-primary" %>
+			<% if offer.expired_offer? %>
+				<%= link_to 'Republish', url_for(:job_offers, :republish, :offer_id => offer.id), :class => "btn btn-success"%>
+			<%end%>
 			<%- form_tag url(:job_offers, :destroy, :offer_id => offer.id), :method => :delete, :style => 'display:inline' do %>
                 <button type='submit' title="Delete offer" rel='tooltip' class="btn btn-secondary" >Delete
                 </button>

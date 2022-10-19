@@ -23,8 +23,15 @@ JobVacancy::App.controllers :job_offers do
   get :edit, with: :offer_id do
     @job_offer = JobOfferForm.from(JobOfferRepository.new.find(params[:offer_id]))
     @edit = true
-    @value = @job_offer.expired_date
+    @republish = false
     # TODO: validate the current user is the owner of the offer
+    render 'job_offers/edit'
+  end
+
+  get :republish, with: :offer_id do
+    @job_offer = JobOfferForm.from(JobOfferRepository.new.find(params[:offer_id]))
+    @edit = false
+    @republish = true
     render 'job_offers/edit'
   end
 
