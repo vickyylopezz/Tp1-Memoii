@@ -14,3 +14,9 @@ Feature: Job Offers expired date
   Scenario: Expired job offer
     When I visit my offers list on 21/10/22
     Then I should not see "Programmer job" in the offers list
+
+  Scenario: Republish expired job offer
+  When I visit my offers list on 21/10/22
+  And republish "Programmer job" expired offer with date 23/10/22
+  Then I should see 23/10/22 in my offers list
+  

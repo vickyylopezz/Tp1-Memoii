@@ -23,8 +23,15 @@ JobVacancy::App.controllers :job_offers do
   get :edit, with: :offer_id do
     @job_offer = JobOfferForm.from(JobOfferRepository.new.find(params[:offer_id]))
     @edit = true
-    @value = @job_offer.expired_date
+    @republish = false
     # TODO: validate the current user is the owner of the offer
+    render 'job_offers/edit'
+  end
+
+  get :republish, with: :offer_id do
+    @job_offer = JobOfferForm.from(JobOfferRepository.new.find(params[:offer_id]))
+    @edit = false
+    @republish = true
     render 'job_offers/edit'
   end
 
@@ -47,7 +54,9 @@ JobVacancy::App.controllers :job_offers do
     personal_bio = params[:job_application_form][:personal_bio]
     curriculum = params[:job_application_form][:curriculum]
     @job_application = JobApplication.create_for(applicant_email, @job_offer, personal_bio, curriculum)
-    unless JobApplicationRepository.new.save(@job_application).nil?
+    if JobApplicationRepository.new.save(@job_application).nil?
+      flash[:error] = 'You have already applied to this job offer'
+    else
       @job_application.process
       @job_application.process_to_offerer
       flash[:success] = 'Contact information sent.'
