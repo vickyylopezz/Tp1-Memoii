@@ -12,6 +12,7 @@ JobVacancy::App.controllers :job_offers do
   get :new do
     @job_offer = JobOfferForm.new
     @edit = false
+    @republish = false
     render 'job_offers/new'
   end
 
@@ -32,7 +33,7 @@ JobVacancy::App.controllers :job_offers do
     @job_offer = JobOfferForm.from(JobOfferRepository.new.find(params[:offer_id]))
     @edit = false
     @republish = true
-    render 'job_offers/edit'
+    render 'job_offers/republish'
   end
 
   get :apply, with: :offer_id do
