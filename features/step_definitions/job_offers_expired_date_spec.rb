@@ -13,7 +13,7 @@ end
 When('republish {string} expired offer with date {int}\/{int}\/{int}') do |_string, day, month, year|
   click_link('Republish')
   fill_in('job_offer_form[expired_date]', with: Date.new(year, month, day))
-  click_button('Save')
+  click_button('Create')
 end
 
 Then('^I should see "(.*?)" in my offers list$') do |title|
