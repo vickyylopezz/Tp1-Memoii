@@ -19,6 +19,17 @@ end
 When(/^I create a new offer with "(.*?)" as the title$/) do |title|
   visit '/job_offers/new'
   fill_in('job_offer_form[title]', with: title)
+  fill_in('job_offer_form[expired_date]', with: Date.today)
+  click_button('Create')
+end
+
+When(/^I create a new job offer with "(.*?)" as the title$/) do |title|
+  visit '/job_offers/new'
+  fill_in('job_offer_form[title]', with: title)
+end
+
+When('{int}\/{int}\/{int} as the expired date') do |day, month, year|
+  fill_in('job_offer_form[expired_date]', with: Date.new(year, month, day))
   click_button('Create')
 end
 
@@ -57,6 +68,7 @@ Given(/^I have "(.*?)" offer in my offers list$/) do |offer_title|
 
   visit '/job_offers/new'
   fill_in('job_offer_form[title]', with: offer_title)
+  fill_in('job_offer_form[expired_date]', with: Date.today)
   click_button('Create')
 end
 
@@ -73,6 +85,7 @@ end
 When('I create a new offer with {string} and {int} salary') do |title, salary|
   visit '/job_offers/new'
   fill_in('job_offer_form[title]', with: title)
+  fill_in('job_offer_form[expired_date]', with: Date.today)
   fill_in('job_offer_form[salary]', with: salary)
   click_button('Create')
 end
@@ -80,6 +93,7 @@ end
 When('I create a new offer with {string} and no salary') do |title|
   visit '/job_offers/new'
   fill_in('job_offer_form[title]', with: title)
+  fill_in('job_offer_form[expired_date]', with: Date.today)
   fill_in('job_offer_form[salary]', with: '')
   click_button('Create')
 end

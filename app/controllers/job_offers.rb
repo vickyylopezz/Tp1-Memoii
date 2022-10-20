@@ -11,6 +11,8 @@ JobVacancy::App.controllers :job_offers do
 
   get :new do
     @job_offer = JobOfferForm.new
+    @edit = false
+    @republish = false
     render 'job_offers/new'
   end
 
@@ -21,8 +23,17 @@ JobVacancy::App.controllers :job_offers do
 
   get :edit, with: :offer_id do
     @job_offer = JobOfferForm.from(JobOfferRepository.new.find(params[:offer_id]))
+    @edit = true
+    @republish = false
     # TODO: validate the current user is the owner of the offer
     render 'job_offers/edit'
+  end
+
+  get :republish, with: :offer_id do
+    @job_offer = JobOfferForm.from(JobOfferRepository.new.find(params[:offer_id]))
+    @edit = false
+    @republish = true
+    render 'job_offers/republish'
   end
 
   get :apply, with: :offer_id do
@@ -33,7 +44,8 @@ JobVacancy::App.controllers :job_offers do
   end
 
   post :search do
-    @offers = JobOfferRepository.new.search_by_title(params[:q])
+    @search = params[:q]
+    @offers = JobOfferRepository.new.search_by_title(@search)
     render 'job_offers/list'
   end
 
@@ -41,12 +53,15 @@ JobVacancy::App.controllers :job_offers do
     @job_offer = JobOfferRepository.new.find(params[:offer_id])
     applicant_email = params[:job_application_form][:applicant_email]
     personal_bio = params[:job_application_form][:personal_bio]
-    p personal_bio.length
-    @job_application = JobApplication.create_for(applicant_email, @job_offer, personal_bio)
-    JobApplicationRepository.new.save(@job_application)
-    @job_application.process
-
-    flash[:success] = 'Contact information sent.'
+    curriculum = params[:job_application_form][:curriculum]
+    @job_application = JobApplication.create_for(applicant_email, @job_offer, personal_bio, curriculum)
+    if JobApplicationRepository.new.save(@job_application).nil?
+      flash[:error] = 'You have already applied to this job offer'
+    else
+      @job_application.process
+      @job_application.process_to_offerer
+      flash[:success] = 'Contact information sent.'
+    end
     redirect '/job_offers'
   rescue StandardError => e
     @job_offer = JobOfferForm.from(JobOfferRepository.new.find(params[:offer_id]))
@@ -59,6 +74,7 @@ JobVacancy::App.controllers :job_offers do
   post :create do
     job_offer = JobOffer.new(job_offer_params)
     job_offer.owner = current_user
+    job_offer.date_provider = DateProvider.new
     if JobOfferRepository.new.save(job_offer)
       TwitterClient.publish(job_offer) if params['create_and_twit']
       flash[:success] = 'Offer created'
@@ -68,7 +84,7 @@ JobVacancy::App.controllers :job_offers do
     @job_offer = JobOfferForm.new
     @errors = e.model.errors
     flash.now[:error] = 'Please review the errors'
-    render 'job_offers/list'
+    render 'job_offers/new'
   end
 
   post :update, with: :offer_id do

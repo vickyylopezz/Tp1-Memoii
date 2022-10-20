@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe JobApplication do
-  let(:job_offer) { JobOffer.new(title: 'a title') }
+  let(:job_offer) { JobOffer.new(title: 'a title', expired_date: Date.new(2022, 3, 2)) }
 
   describe 'valid?' do
     it 'should be invalid when email is blank' do
@@ -47,6 +47,12 @@ describe JobApplication do
       ja = described_class.create_for('applicant@test.com', job_offer, personal_bio)
       expect(ja.personal_bio).to eq(personal_bio)
     end
+
+    it 'should set curriculum' do
+      curriculum = 'curriculum.com'
+      ja = described_class.create_for('applicant@test.com', job_offer, 'Test bio', curriculum)
+      expect(ja.curriculum).to eq(curriculum)
+    end
   end
 
   describe 'process' do
@@ -54,6 +60,12 @@ describe JobApplication do
       ja = described_class.create_for('applicant@test.com', job_offer, 'test')
       expect(JobVacancy::App).to receive(:deliver).with(:notification, :contact_info_email, ja)
       ja.process
+    end
+
+    it 'should deliver applicant information to offerer' do
+      ja = described_class.create_for('applicant@test.com', job_offer, 'test')
+      expect(JobVacancy::App).to receive(:deliver).with(:offerer_notification, :contact_info_email, ja)
+      ja.process_to_offerer
     end
   end
 end

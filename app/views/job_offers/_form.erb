@@ -1,13 +1,16 @@
 	<%= f.label :title %>
- 	<%= f.text_field :title, :class => "input-block-level" %>
+ 	<%= f.text_field :title, :class => "input-block-level",:readonly => @republish %>
 	<%= errors_for(@errors, :title) %>
   <%= f.label :location %>
-  <%= f.text_field :location, :class => "input-block-level" %>
+  <%= f.text_field :location, :class => "input-block-level",:readonly => @republish %>
 	<%= errors_for(@errors, :location) %>
   <%= f.label :description %>
-  <%= f.text_area :description, :class => "input-block-level" %>
+  <%= f.text_area :description, :class => "input-block-level",:readonly => @republish %>
 	<%= errors_for(@errors, :description) %>
   <%= f.label :salary %>
-  <%= f.text_field :salary, :class => "input-block-level" %>
+  <%= f.text_field :salary, :class => "input-block-level", :readonly => @republish%>
 	<%= errors_for(@errors, :salary) %>
+  <%= f.label :expired_date %>
+  <%= f.date_field :expired_date,:style => "width: 150px;", :class => "input-block-level",:readonly => @edit %>
+	<%= errors_for(@errors, :expired_date) %>
   <br/>

@@ -7,6 +7,14 @@ class UserRepository < BaseRepository
     load_object(row) unless row.nil?
   end
 
+  def save(user)
+    if find_by_email(user&.email).nil?
+      !insert(user).id.nil?
+    else
+      raise DuplicatedUserError
+    end
+  end
+
   protected
 
   def changeset(user)
